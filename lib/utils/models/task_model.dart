@@ -1,12 +1,20 @@
 import 'dart:convert';
 
-import 'package:default_project_architecture/utils/const/app_enums.dart';
+import 'package:default_project_architecture/utils/const/enums/task_enums.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
+part 'task_model.g.dart';
+
+@HiveType(typeId: 0)
 class TaskModel extends Equatable {
+  @HiveField(0)
   final String taskId;
+  @HiveField(1)
   final String? taskName;
+  @HiveField(2)
   final String? taskDescription;
+  @HiveField(3)
   final TaskStatusEnums? taskStatus;
 
   const TaskModel({

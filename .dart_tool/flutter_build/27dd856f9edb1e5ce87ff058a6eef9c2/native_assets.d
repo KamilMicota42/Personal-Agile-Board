@@ -1,0 +1,1 @@
+ /Users/kamil/Development/PersonalAgileBoard/.dart_tool/flutter_build/27dd856f9edb1e5ce87ff058a6eef9c2/native_assets.yaml: 

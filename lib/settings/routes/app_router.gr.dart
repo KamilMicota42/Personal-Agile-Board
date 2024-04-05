@@ -9,13 +9,14 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
-import 'package:default_project_architecture/utils/const/app_enums.dart' as _i6;
-import 'package:default_project_architecture/views/screens/archived_screen.dart'
+import 'package:default_project_architecture/presentation/screens/archived_screen.dart'
     as _i1;
-import 'package:default_project_architecture/views/screens/edit_task_screen.dart'
+import 'package:default_project_architecture/presentation/screens/edit_task_screen.dart'
     as _i2;
-import 'package:default_project_architecture/views/screens/todo_screen.dart'
+import 'package:default_project_architecture/presentation/screens/todo_screen.dart'
     as _i3;
+import 'package:default_project_architecture/utils/const/enums/task_enums.dart'
+    as _i6;
 import 'package:flutter/material.dart' as _i5;
 
 abstract class $AppRouter extends _i4.RootStackRouter {
@@ -46,7 +47,7 @@ abstract class $AppRouter extends _i4.RootStackRouter {
     TodoRoute.name: (routeData) {
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.TodoScreen(),
+        child: _i4.WrappedRoute(child: const _i3.TodoScreen()),
       );
     },
   };

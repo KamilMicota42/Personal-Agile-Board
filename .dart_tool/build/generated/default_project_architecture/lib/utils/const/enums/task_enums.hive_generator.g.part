@@ -1,0 +1,52 @@
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class TaskStatusEnumsAdapter extends TypeAdapter<TaskStatusEnums> {
+  @override
+  final int typeId = 1;
+
+  @override
+  TaskStatusEnums read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 1:
+        return TaskStatusEnums.open;
+      case 2:
+        return TaskStatusEnums.inprogress;
+      case 3:
+        return TaskStatusEnums.fixed;
+      case 4:
+        return TaskStatusEnums.archived;
+      default:
+        return TaskStatusEnums.open;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TaskStatusEnums obj) {
+    switch (obj) {
+      case TaskStatusEnums.open:
+        writer.writeByte(1);
+        break;
+      case TaskStatusEnums.inprogress:
+        writer.writeByte(2);
+        break;
+      case TaskStatusEnums.fixed:
+        writer.writeByte(3);
+        break;
+      case TaskStatusEnums.archived:
+        writer.writeByte(4);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TaskStatusEnumsAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

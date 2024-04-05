@@ -1,3 +1,4 @@
+import 'package:default_project_architecture/services/hive_api.dart';
 import 'package:default_project_architecture/settings/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -5,6 +6,7 @@ import 'settings/routes/app_router.dart';
 
 void main() async {
   await configureDependencies(Environment.dev);
+  await getIt<HiveApi>().initHive();
   runApp(const MyApp());
 }
 
