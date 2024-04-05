@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../settings/injection.dart';
 import '../../settings/routes/app_router.dart';
@@ -8,6 +9,8 @@ import '../../utils/const/enums/task_enums.dart';
 import '../../utils/models/task_model.dart';
 import '../../widgets/main_app_bar.dart';
 import '../../widgets/main_drawer.dart';
+import '../../widgets/task_card.dart';
+import '../cubit/cubit/tasks_cubit.dart';
 
 @RoutePage()
 class ArchivedScreen extends StatefulWidget {
@@ -23,48 +26,33 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(appBarTitle: "Archived"),
+      appBar: const MainAppBar(appBarTitle: "Archived tasks list"),
       drawer: const MainDrawer(),
       backgroundColor: Colors.blueGrey,
-      body: ListView.builder(
-        itemCount: tasks.length,
-        padding: const EdgeInsets.only(top: 12, bottom: 24),
-        itemBuilder: (context, index) {
-          if (tasks[index].taskStatus == TaskStatusEnums.fixed || tasks[index].taskStatus == TaskStatusEnums.archived) {
-            return InkWell(
-              onTap: () {
-                getIt<AppRouter>().navigate(EditTaskRoute(
-                  taskName: tasks[index].taskName,
-                  taskDescription: tasks[index].taskDescription,
-                  taskStatus: tasks[index].taskStatus,
-                ));
-              },
-              child: Card(
-                color: Colors.black12,
-                child: SizedBox(
-                  height: 120,
-                  child: Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(tasks[index].taskName.toString(), style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                        Text(tasks[index].taskDescription.toString(), style: const TextStyle(color: Colors.white), overflow: TextOverflow.fade),
-                        const Expanded(child: SizedBox()),
-                        Text(
-                          tasks[index].taskStatus?.value != null ? tasks[index].taskStatus!.value : TaskStatusEnums.open.value,
-                          style: const TextStyle(color: Colors.white),
-                          overflow: TextOverflow.fade,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+      body: BlocBuilder<TasksCubit, TasksState>(
+        bloc: getIt<TasksCubit>(),
+        builder: (context, state) {
+          final isLoading = state.maybeWhen(loading: () => true, orElse: () => false);
+          final errorText = state.maybeWhen(error: (errorText) => errorText, orElse: () => null);
+          List<TaskModel> tasks = state.maybeWhen(success: (tasks) => tasks, orElse: () => []);
+          if (isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          } else {
-            return const SizedBox();
+          } else if (errorText != null) {
+            return Center(
+              child: Text(errorText),
+            );
           }
+          return ListView.builder(
+            itemCount: tasks.length,
+            padding: const EdgeInsets.only(top: 12, bottom: 120),
+            itemBuilder: (context, index) {
+              return (tasks[index].taskStatus == TaskStatusEnums.fixed || tasks[index].taskStatus == TaskStatusEnums.archived)
+                  ? TaskCard(task: tasks[index])
+                  : const SizedBox();
+            },
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(

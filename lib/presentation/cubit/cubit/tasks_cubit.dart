@@ -36,4 +36,13 @@ class TasksCubit extends Cubit<TasksState> {
       emit(TasksState.error(error: e.toString()));
     }
   }
+
+  void editTask(TaskModel task) {
+    try {
+      getIt<HiveApi>().editData(task.taskId, task, "tasks");
+      readTasks();
+    } catch (e) {
+      emit(TasksState.error(error: e.toString()));
+    }
+  }
 }

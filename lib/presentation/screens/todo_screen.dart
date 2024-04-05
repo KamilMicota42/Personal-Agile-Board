@@ -3,7 +3,6 @@ import 'package:default_project_architecture/presentation/cubit/cubit/tasks_cubi
 import 'package:default_project_architecture/settings/routes/app_router.gr.dart';
 import 'package:default_project_architecture/utils/models/task_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../settings/injection.dart';
@@ -11,6 +10,7 @@ import '../../settings/routes/app_router.dart';
 import '../../utils/const/enums/task_enums.dart';
 import '../../widgets/main_app_bar.dart';
 import '../../widgets/main_drawer.dart';
+import '../../widgets/task_card.dart';
 
 @RoutePage()
 class TodoScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -65,65 +65,6 @@ class _TodoScreenState extends State<TodoScreen> {
           getIt<AppRouter>().navigate(EditTaskRoute());
         },
         child: const Icon(Icons.add_outlined),
-      ),
-    );
-  }
-}
-
-class TaskCard extends StatelessWidget {
-  final TaskModel task;
-  const TaskCard({
-    required this.task,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.black12,
-      child: InkWell(
-        onTap: () {
-          getIt<AppRouter>().navigate(EditTaskRoute(
-            taskUuid: task.taskId,
-            taskName: task.taskName,
-            taskDescription: task.taskDescription,
-            taskStatus: task.taskStatus,
-          ));
-        },
-        child: SizedBox(
-          height: 120,
-          child: Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(task.taskName.toString(), style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                Text(task.taskDescription.toString(), style: const TextStyle(color: Colors.white), overflow: TextOverflow.clip, maxLines: 2),
-                const Expanded(child: SizedBox()),
-                Row(
-                  children: [
-                    Text(
-                      task.taskStatus != null ? task.taskStatus!.value : TaskStatusEnums.open.value,
-                      style: const TextStyle(color: Colors.white),
-                      overflow: TextOverflow.fade,
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      icon: const Icon(Icons.archive_outlined),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.check_outlined),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
