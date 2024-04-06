@@ -27,19 +27,16 @@ class TasksCubit extends Cubit<TasksState> {
 
   void addTask(TaskModel task) {
     try {
-      getIt<HiveApi>().saveData(
-        task,
-        "tasks",
-      );
+      getIt<HiveApi>().saveData(task, "tasks");
       readTasks();
     } catch (e) {
       emit(TasksState.error(error: e.toString()));
     }
   }
 
-  void editTask(TaskModel task) {
+  void editTask(String taskId, TaskModel newValue) {
     try {
-      getIt<HiveApi>().editData(task.taskId, task, "tasks");
+      getIt<HiveApi>().editData("tasks", taskId, newValue);
       readTasks();
     } catch (e) {
       emit(TasksState.error(error: e.toString()));

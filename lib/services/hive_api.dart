@@ -23,10 +23,8 @@ class HiveApi {
 
   void deleteData() {}
 
-  void editData(String key, dynamic object, String boxName) {
+  void editData(String boxName, String key, dynamic object) {
     final box = Hive.box(boxName);
-    var orgObject = box.get(key);
-    print(orgObject);
-    print(object);
+    box.put(key, object);
   }
 }

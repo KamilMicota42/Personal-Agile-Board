@@ -98,7 +98,6 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
         backgroundColor: Colors.white,
         child: Icon(widget.taskUuid == null ? Icons.add_outlined : Icons.edit_outlined),
         onPressed: () {
-          print(taskNameController.text);
           String newUuid = const Uuid().v1().toString();
           TaskModel newTask = TaskModel(
             taskId: widget.taskUuid != null ? widget.taskUuid! : newUuid,
@@ -106,7 +105,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             taskDescription: taskDescriptionController.text,
             taskStatus: parseTaskStatus(taskStatusController),
           );
-          widget.taskUuid == null ? getIt<TasksCubit>().addTask(newTask) : {getIt<TasksCubit>().editTask(newTask)};
+          widget.taskUuid == null ? getIt<TasksCubit>().addTask(newTask) : getIt<TasksCubit>().editTask(widget.taskUuid!, newTask);
           getIt<AppRouter>().maybePop();
         },
       ),
