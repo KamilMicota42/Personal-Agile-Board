@@ -49,7 +49,17 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
             padding: const EdgeInsets.only(top: 12, bottom: 120),
             itemBuilder: (context, index) {
               return (tasks[index].taskStatus == TaskStatusEnums.fixed || tasks[index].taskStatus == TaskStatusEnums.archived)
-                  ? TaskCard(task: tasks[index], changeToDoneOnClick: false)
+                  ? TaskCard(
+                      task: tasks[index],
+                      additionalButton: IconButton(
+                        icon: const Icon(Icons.restore_outlined),
+                        color: Colors.white,
+                        onPressed: () {
+                          getIt<TasksCubit>()
+                              .editTask(tasks[index].taskId, tasks[index].copyWith(taskId: tasks[index].taskId, taskStatus: TaskStatusEnums.open));
+                        },
+                      ),
+                    )
                   : const SizedBox();
             },
           );

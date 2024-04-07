@@ -29,6 +29,24 @@ class MainDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
+                  'Agile board',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: getIt<AppRouter>().current.name == "AgileBoardRoute" ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+                const Icon(Icons.view_week_outlined, color: Colors.white),
+              ],
+            ),
+            onTap: () {
+              getIt<AppRouter>().replace(const AgileBoardRoute());
+            },
+          ),
+          ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
                   'Todo list',
                   style: TextStyle(
                     color: Colors.white,
@@ -41,19 +59,6 @@ class MainDrawer extends StatelessWidget {
             onTap: () {
               getIt<AppRouter>().replace(const TodoRoute());
             },
-          ),
-          ListTile(
-            title: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Agile board',
-                  style: TextStyle(color: Colors.white),
-                ),
-                Icon(Icons.view_week_outlined, color: Colors.white),
-              ],
-            ),
-            onTap: () {},
           ),
           ListTile(
             title: Row(

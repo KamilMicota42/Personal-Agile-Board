@@ -53,7 +53,17 @@ class _TodoScreenState extends State<TodoScreen> {
             padding: const EdgeInsets.only(top: 12, bottom: 120),
             itemBuilder: (context, index) {
               return (tasks[index].taskStatus == TaskStatusEnums.open || tasks[index].taskStatus == TaskStatusEnums.inprogress)
-                  ? TaskCard(task: tasks[index], changeToDoneOnClick: true)
+                  ? TaskCard(
+                      task: tasks[index],
+                      additionalButton: IconButton(
+                        icon: const Icon(Icons.check_outlined),
+                        color: Colors.white,
+                        onPressed: () {
+                          getIt<TasksCubit>()
+                              .editTask(tasks[index].taskId, tasks[index].copyWith(taskId: tasks[index].taskId, taskStatus: TaskStatusEnums.fixed));
+                        },
+                      ),
+                    )
                   : const SizedBox();
             },
           );

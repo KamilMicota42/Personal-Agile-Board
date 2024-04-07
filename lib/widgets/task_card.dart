@@ -1,4 +1,3 @@
-import 'package:default_project_architecture/presentation/cubit/cubit/tasks_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../settings/injection.dart';
@@ -9,28 +8,29 @@ import '../utils/models/task_model.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskModel task;
-  final bool changeToDoneOnClick;
+  final Widget? additionalButton;
   const TaskCard({
     required this.task,
-    required this.changeToDoneOnClick,
+    this.additionalButton,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.black12,
-      child: InkWell(
-        onTap: () {
-          getIt<AppRouter>().navigate(EditTaskRoute(
-            taskUuid: task.taskId,
-            taskName: task.taskName,
-            taskDescription: task.taskDescription,
-            taskStatus: task.taskStatus,
-          ));
-        },
-        child: SizedBox(
-          height: 120,
+    return SizedBox(
+      height: 150,
+      width: 200,
+      child: Card(
+        color: Colors.black12,
+        child: InkWell(
+          onTap: () {
+            getIt<AppRouter>().navigate(EditTaskRoute(
+              taskUuid: task.taskId,
+              taskName: task.taskName,
+              taskDescription: task.taskDescription,
+              taskStatus: task.taskStatus,
+            ));
+          },
           child: Padding(
             padding: const EdgeInsets.all(6.0),
             child: Column(
@@ -47,21 +47,7 @@ class TaskCard extends StatelessWidget {
                       overflow: TextOverflow.fade,
                     ),
                     const Spacer(),
-                    changeToDoneOnClick
-                        ? IconButton(
-                            icon: const Icon(Icons.check_outlined),
-                            color: Colors.white,
-                            onPressed: () {
-                              getIt<TasksCubit>().editTask(task.taskId, task.copyWith(taskId: task.taskId, taskStatus: TaskStatusEnums.fixed));
-                            },
-                          )
-                        : IconButton(
-                            icon: const Icon(Icons.restore_outlined),
-                            color: Colors.white,
-                            onPressed: () {
-                              getIt<TasksCubit>().editTask(task.taskId, task.copyWith(taskId: task.taskId, taskStatus: TaskStatusEnums.open));
-                            },
-                          ),
+                    additionalButton != null ? additionalButton! : const SizedBox(),
                   ],
                 ),
               ],
