@@ -27,6 +27,7 @@ class AgileBoardScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _AgileBoardScreenState extends State<AgileBoardScreen> {
+  ScrollController sc = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +65,7 @@ class _AgileBoardScreenState extends State<AgileBoardScreen> {
             shrinkWrap: true,
             itemCount: TaskStatusEnums.values.length,
             padding: EdgeInsetsDirectional.zero,
+            controller: sc,
             itemBuilder: (context, currTaskStatus) {
               return TaskStatusEnums.values[currTaskStatus] != TaskStatusEnums.archived
                   ? Padding(
@@ -89,17 +91,27 @@ class _AgileBoardScreenState extends State<AgileBoardScreen> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, currTask) {
                                     return (tasks[currTask].taskStatus == TaskStatusEnums.values[currTaskStatus])
-                                        ? LongPressDraggable<TaskModel>(
-                                            delay: const Duration(milliseconds: 100),
-                                            data: tasks[currTask],
-                                            feedback: TaskCard(
-                                              task: tasks[currTask],
-                                            ),
-                                            childWhenDragging: TaskCard(
-                                              task: tasks[currTask],
-                                            ),
-                                            child: TaskCard(
-                                              task: tasks[currTask],
+                                        ? Listener(
+                                            onPointerMove: (event) {
+                                              if (event.position.dx < MediaQuery.of(context).size.width / 4) {
+                                                sc.jumpTo(sc.offset - 10);
+                                              }
+                                              if (event.position.dx > MediaQuery.of(context).size.width / 4) {
+                                                sc.jumpTo(sc.offset + 10);
+                                              }
+                                            },
+                                            child: LongPressDraggable<TaskModel>(
+                                              delay: const Duration(milliseconds: 100),
+                                              data: tasks[currTask],
+                                              feedback: TaskCard(
+                                                task: tasks[currTask],
+                                              ),
+                                              childWhenDragging: TaskCard(
+                                                task: tasks[currTask],
+                                              ),
+                                              child: TaskCard(
+                                                task: tasks[currTask],
+                                              ),
                                             ),
                                           )
                                         : const SizedBox();
@@ -136,7 +148,8 @@ class _AgileBoardScreenState extends State<AgileBoardScreen> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                    'Are You sure You want to archive all the tasks. All tasks available on this board will change status to archived. You will be able to still find them in Archived tab.'),
+                  'Are You sure You want to archive all the tasks. All tasks available on this board will change status to archived. You will be able to still find them in Archived tab.',
+                ),
               ],
             ),
           ),
