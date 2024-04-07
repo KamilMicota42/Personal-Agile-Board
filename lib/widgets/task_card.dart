@@ -1,3 +1,4 @@
+import 'package:default_project_architecture/presentation/cubit/cubit/tasks_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../settings/injection.dart';
@@ -8,8 +9,10 @@ import '../utils/models/task_model.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskModel task;
+  final bool changeToDoneOnClick;
   const TaskCard({
     required this.task,
+    required this.changeToDoneOnClick,
     super.key,
   });
 
@@ -44,16 +47,21 @@ class TaskCard extends StatelessWidget {
                       overflow: TextOverflow.fade,
                     ),
                     const Spacer(),
-                    IconButton(
-                      icon: const Icon(Icons.archive_outlined),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.check_outlined),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
+                    changeToDoneOnClick
+                        ? IconButton(
+                            icon: const Icon(Icons.check_outlined),
+                            color: Colors.white,
+                            onPressed: () {
+                              getIt<TasksCubit>().editTask(task.taskId, task.copyWith(taskId: task.taskId, taskStatus: TaskStatusEnums.fixed));
+                            },
+                          )
+                        : IconButton(
+                            icon: const Icon(Icons.restore_outlined),
+                            color: Colors.white,
+                            onPressed: () {
+                              getIt<TasksCubit>().editTask(task.taskId, task.copyWith(taskId: task.taskId, taskStatus: TaskStatusEnums.open));
+                            },
+                          ),
                   ],
                 ),
               ],

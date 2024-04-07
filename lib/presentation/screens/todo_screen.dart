@@ -53,7 +53,7 @@ class _TodoScreenState extends State<TodoScreen> {
             padding: const EdgeInsets.only(top: 12, bottom: 120),
             itemBuilder: (context, index) {
               return (tasks[index].taskStatus == TaskStatusEnums.open || tasks[index].taskStatus == TaskStatusEnums.inprogress)
-                  ? TaskCard(task: tasks[index])
+                  ? TaskCard(task: tasks[index], changeToDoneOnClick: true)
                   : const SizedBox();
             },
           );

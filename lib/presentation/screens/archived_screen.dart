@@ -49,7 +49,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
             padding: const EdgeInsets.only(top: 12, bottom: 120),
             itemBuilder: (context, index) {
               return (tasks[index].taskStatus == TaskStatusEnums.fixed || tasks[index].taskStatus == TaskStatusEnums.archived)
-                  ? TaskCard(task: tasks[index])
+                  ? TaskCard(task: tasks[index], changeToDoneOnClick: false)
                   : const SizedBox();
             },
           );
