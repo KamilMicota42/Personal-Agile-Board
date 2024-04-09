@@ -28,3 +28,5 @@ The only object in project is Task and it has values like:
 ![Screenshot 2024-04-09 at 19 52 06](https://github.com/KamilMicota42/Personal-Agile-Board/assets/85360923/558bc1ee-b1ee-46e6-9e9f-2c379da98ad4)
 ![Screenshot 2024-04-09 at 19 52 44](https://github.com/KamilMicota42/Personal-Agile-Board/assets/85360923/d6cdbb12-5ddb-4439-8666-0a545ab7c2b5)
 ![Screenshot 2024-04-09 at 19 53 20](https://github.com/KamilMicota42/Personal-Agile-Board/assets/85360923/882873a4-25ea-45fc-a472-712c1e1713a8)
+![Screenshot 2024-04-09 at 19 54 00](https://github.com/KamilMicota42/Personal-Agile-Board/assets/85360923/b2a86e44-234b-4c6a-bc1b-5a63da4b60d1)
+
