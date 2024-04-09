@@ -20,4 +20,6 @@ The only object in project is Task and it has values like:
 • Status
 
 ## User interface
-![simulator_screenshot_34F578EF-3AED-459B-8DCA-8093010E0002](https://github.com/KamilMicota42/Personal-Agile-Board/assets/85360923/363880ee-65f8-4743-9cc7-62fb7f4553e4)
+![Screenshot 2024-04-09 at 19 49 29](https://github.com/KamilMicota42/Personal-Agile-Board/assets/85360923/225c3c02-2e09-44e0-9488-f6f8da1a8991)
+![Screenshot 2024-04-09 at 19 50 21](https://github.com/KamilMicota42/Personal-Agile-Board/assets/85360923/99aeb831-b1eb-48cf-8a0a-d8ed7f42841f)
+![Screenshot 2024-04-09 at 19 50 32](https://github.com/KamilMicota42/Personal-Agile-Board/assets/85360923/080d6a65-37cb-4a9f-b99d-c170b3b27f30)
