@@ -3,6 +3,9 @@
 ## Summary
 Personal Agile Board - simple project (can be even called super cool todo list - but let's not call it that please) created to learn about creating local database in device memory (hive package - https://pub.dev/packages/hive) and some draggable interaction (native flutter draggable widget - https://api.flutter.dev/flutter/widgets/Draggable-class.html) and fix a little bit previous default clean architecture.
 
+## Technology stack
+auto_route, get_it, injectable, equatable, uuid, hive
+
 ## Use case
 Because of native device memory we don't need authentication so user has access to all the functionalities from the start. The app is very simple user can just add tasks and change their status to organize their daily "quests".
 • Add task
