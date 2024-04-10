@@ -1,7 +1,7 @@
 # Personal Agile Board
 
 ## Summary
-Personal Agile Board - simple project (can be even called super cool todo list - but let's not call it that please) created to learn about creating local database in device memory (hive package - https://pub.dev/packages/hive) and some draggable interaction (native flutter draggable widget - https://api.flutter.dev/flutter/widgets/Draggable-class.html) and fix a little bit previous default clean architecture.
+Personal Agile Board - simple project (can be even called super cool todo list - but let's not call it that please) created to learn about creating local database in device memory (hive package - https://pub.dev/packages/hive if only i would knew about isar - https://pub.dev/packages/isar) and some draggable interaction (native flutter draggable widget - https://api.flutter.dev/flutter/widgets/Draggable-class.html) and fix a little bit previous default clean architecture.
 
 ## Technology stack
 auto_route, get_it, injectable, equatable, uuid, hive
